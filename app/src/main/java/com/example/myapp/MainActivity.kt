@@ -20,15 +20,28 @@ import androidx.core.content.ContextCompat
 import com.example.bluetoothmqtt.bluetooth.BluetoothManager
 import com.example.bluetoothmqtt.mqtt.MqttManager
 import kotlinx.coroutines.*
+import org.eclipse.paho.client.mqttv3.MqttClient
 import org.json.JSONObject
 
-class MainActivity : ComponentActivity() {
+
+class MainActivity<MqttAndroidClient> : ComponentActivity() {
     private val bluetoothManager = BluetoothManager()
-    private val mqttManager = MqttManager("tcp://broker.emqx.io:1883", "android-client")
+    private val mqttClient: MqttClient = MqttClient("tcp://broker.emqx.io:1883", "android-client", null)
+
+    //private val mqttManager = MqttManager("tcp://broker.emqx.io:1883", "android-client")
+
+
+    //lateinit var mqttManager: MqttManager
+
+
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //mqttManager = MqttManager(applicationContext, "tcp://broker.emqx.io:1883", "android-client")
+        //mqttManager.connect()
+
 
         setContent {
             val context = LocalContext.current
@@ -44,7 +57,7 @@ class MainActivity : ComponentActivity() {
             DisposableEffect(Unit) {
                 onDispose {
                     bluetoothManager.stopListening()
-                    mqttManager.disconnect()
+                    mqttClient.disconnect()
                 }
             }
 
@@ -153,7 +166,7 @@ class MainActivity : ComponentActivity() {
                         Divider()
 
                         // データ表示
-                        Text("受信データ（生）:")
+                        Text("受信データ:")
                         Text(sensorData)
 
                         Divider()
@@ -161,7 +174,7 @@ class MainActivity : ComponentActivity() {
                         // MQTT送信ボタン
                         Button(
                             onClick = {
-                                mqttManager.publish("m5stack/sensor", sensorData)
+                                mqttClient.publish("m5stack/sensor", sensorData)
                                 Toast.makeText(context, "MQTTに送信しました", Toast.LENGTH_SHORT)
                                     .show()
                             },
@@ -175,14 +188,14 @@ class MainActivity : ComponentActivity() {
                                 try {
                                     val json = JSONObject(sensorData)
                                     val pressure = json.optString("pressure", "不明")
-                                    mqttManager.publish("m5stack/pressure", pressure)
+                                    mqttClient.publish("m5stack/sensor", pressure)
                                     Toast.makeText(
                                         context,
                                         "気圧データを送信しました",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 } catch (e: Exception) {
-                                    mqttManager.publish("m5stack/pressure", "parse error")
+                                    mqttClient.publish("m5stack/sensor", "parse error")
                                     Toast.makeText(
                                         context,
                                         "気圧送信に失敗しました",
@@ -223,4 +236,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+private fun MqttClient.publish(s: String, sensorData: String) {
+
 }
