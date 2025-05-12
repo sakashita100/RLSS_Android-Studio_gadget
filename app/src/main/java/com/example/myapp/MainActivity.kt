@@ -19,26 +19,30 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.bluetoothmqtt.bluetooth.BluetoothManager
+import com.example.bluetoothmqtt.mqtt.MqttManager
 import kotlinx.coroutines.*
 import org.eclipse.paho.client.mqttv3.MqttClient
-import org.eclipse.paho.client.mqttv3.MqttMessage
 import org.json.JSONObject
 
-class MainActivity : ComponentActivity() {
+
+class MainActivity<MqttAndroidClient> : ComponentActivity() {
     private val bluetoothManager = BluetoothManager()
-    private val mqttClient: MqttClient =
-        MqttClient("tcp://broker.emqx.io:1883", "android-client", null)
+    private val mqttClient: MqttClient = MqttClient("tcp://broker.emqx.io:1883", "android-client", null)
+
+    //private val mqttManager = MqttManager("tcp://broker.emqx.io:1883", "android-client")
+
+
+    //lateinit var mqttManager: MqttManager
+
+
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        try {
-            mqttClient.connect()
-            Log.d("MQTT", "Connected to broker")
-        } catch (e: Exception) {
-            Log.e("MQTT", "MQTT connect failed: ${e.message}")
-        }
+        //mqttManager = MqttManager(applicationContext, "tcp://broker.emqx.io:1883", "android-client")
+        //mqttManager.connect()
+
 
         setContent {
             val context = LocalContext.current
@@ -46,6 +50,7 @@ class MainActivity : ComponentActivity() {
 
             var isBluetoothEnabled by remember { mutableStateOf(bluetoothAdapter?.isEnabled == true) }
             var sensorData by remember { mutableStateOf("データ受信待ち...") }
+            var jsonData by remember { mutableStateOf("") }
             var pairedDevices by remember { mutableStateOf(setOf<BluetoothDevice>()) }
             var selectedDevice by remember { mutableStateOf<BluetoothDevice?>(null) }
             var isDeviceConnected by remember { mutableStateOf(false) }
@@ -53,7 +58,7 @@ class MainActivity : ComponentActivity() {
             DisposableEffect(Unit) {
                 onDispose {
                     bluetoothManager.stopListening()
-                    if (mqttClient.isConnected) mqttClient.disconnect()
+                    mqttClient.disconnect()
                 }
             }
 
@@ -135,6 +140,12 @@ class MainActivity : ComponentActivity() {
                                         bluetoothManager.connectToDevice(device)
                                         bluetoothManager.startListening { data ->
                                             sensorData = data
+                                            jsonData = try {
+                                                JSONObject(data).toString(4)
+                                            } catch (e: Exception) {
+                                                """{""JSON形式です", }""".trimMargin()
+                                            }
+
                                         }
                                         isDeviceConnected = true
                                     } catch (e: Exception) {
@@ -161,24 +172,26 @@ class MainActivity : ComponentActivity() {
 
                         Divider()
 
-                        // MQTT送信ボタン（全データ）
+                        // MQTT送信ボタン
                         Button(
                             onClick = {
                                 mqttClient.publish("m5stack/sensor", sensorData)
-                                Toast.makeText(context, "MQTTに送信しました", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "MQTTに送信しました", Toast.LENGTH_SHORT)
+                                //Log.d("MQTT", "Published message")
+
                             },
                             enabled = isDeviceConnected && sensorData != "データ受信待ち..."
                         ) {
                             Text("MQTTで全データを送信")
                         }
 
-                        // MQTT送信ボタン（気圧のみ）
                         Button(
                             onClick = {
                                 try {
                                     val json = JSONObject(sensorData)
                                     val pressure = json.optString("pressure", "不明")
                                     mqttClient.publish("m5stack/sensor", pressure)
+
                                     Toast.makeText(
                                         context,
                                         "気圧データを送信しました",
@@ -201,9 +214,19 @@ class MainActivity : ComponentActivity() {
                 }
             )
         }
+
+
     }
 
-    // パーミッション結果処理
+    override fun onPause() {
+        super.onPause()
+
+    }
+    override fun onResume() {
+        super.onResume()
+    }
+
+    // 権限リクエスト後のコールバック
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults: IntArray
     ) {
@@ -218,16 +241,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// 拡張関数でMQTTパブリッシュ
-private fun MqttClient.publish(topic: String, payload: String) {
-    try {
-        val message = MqttMessage()
-        message.payload = payload.toByteArray()
-        message.qos = 0
-        this.publish(topic, message)
-        Log.d("MQTT", "Published to $topic: $payload")
-    } catch (e: Exception) {
-        Log.e("MQTT", "Publish error: ${e.message}")
-        e.printStackTrace()
-    }
+private fun MqttClient.publish(s: String, sensorData: String) {
+
 }
