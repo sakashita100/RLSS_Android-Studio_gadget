@@ -14,4 +14,5 @@
 
 
  ### Android Studioのインストール方法と実行方法
+  - Android StudioをPCにダウンロード,インストールする
 
