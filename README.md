@@ -12,3 +12,6 @@
   - Boards Managerを開く
   - Boardを選択する
 
+
+ # Android Studioのインストール方法と実行方法
+
