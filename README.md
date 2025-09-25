@@ -1,0 +1,2 @@
+# RLSS_Android-Studio_gadget
+遠距離恋愛支援システムのガジェット化のAndroid Studioのコードです
