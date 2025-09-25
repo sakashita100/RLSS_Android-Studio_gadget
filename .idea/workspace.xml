@@ -17,7 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bc2e78d-bb0d-4248-a97c-8591b391a4d0" name="Changes" comment="共有のためのpush">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapp/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapp/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +52,12 @@
     &quot;assignee&quot;: &quot;sakashita100&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/sakashita100/RLSS.git&quot;,
-    &quot;accountId&quot;: &quot;4f59352a-3d11-4e7c-a5a5-03eec170f82d&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/sakashita100/RLSS_Android-Studio_gadget.git",
+    "accountId": "4f59352a-3d11-4e7c-a5a5-03eec170f82d"
   }
-}</component>
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
