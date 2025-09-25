@@ -1,4 +1,5 @@
 //m5stickcplus-bluetooth-hug
+//気圧のデータを送る
 
 #include <M5Unified.h>
 #include "M5UnitENV.h"
