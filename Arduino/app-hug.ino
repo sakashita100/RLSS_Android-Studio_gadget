@@ -1,5 +1,5 @@
-//daiji
 //sumaho~M5stickcplus
+//抱きしめる動作
 
 #include <M5StickCPlus.h>
 #include <BluetoothSerial.h>
