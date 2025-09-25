@@ -12,6 +12,8 @@
     - 緑色の < > Code ボタンをクリックします。
     - 表示されたメニューで HTTPS が選択されていることを確認します。
     - URLの右側にあるコピーアイコンをクリックして、URLをクリップボードにコピーします。
+    - <img width="1732" height="784" alt="image" src="https://github.com/user-attachments/assets/c0364679-e1fa-440d-8a3d-ca2f0168bb79" />
+
 
   - Android Studioでクローン
     - 次にAndroid Studioを開いて、コピーしたURLを使ってプロジェクトをクローンします。
