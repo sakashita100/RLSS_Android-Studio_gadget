@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RLSS
 遠距離恋愛支援システムのガジェット化のためのインストール手順
 
@@ -18,3 +19,7 @@
 
  
 
+=======
+# RLSS_Android-Studio_gadget
+遠距離恋愛支援システムのガジェット化のAndroid Studioのコードです
+>>>>>>> 6e91e52be814811b0c75a12ade29bb23e8e5ed0f
