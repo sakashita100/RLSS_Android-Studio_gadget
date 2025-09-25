@@ -57,6 +57,8 @@ class MainActivity : ComponentActivity() {
         }
 
 
+
+
         try {
             mqttClient.connect(mqttOptions)
             Log.d("MQTT", "Connected to broker")
