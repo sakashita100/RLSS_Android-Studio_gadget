@@ -1,25 +1,35 @@
-<<<<<<< HEAD
-# RLSS
-遠距離恋愛支援システムのガジェット化のためのインストール手順
-
- ### M5Stick C Plus,ENV.Ⅲ senserとM5Stick C Plus,サーボモータを使えるようにするためのArduinoのインストール手順
-  - ArduinoをPCにダウンロード,インストールする
-  - https://www.arduino.cc/en/software/#ide
-  - <img width="1915" height="970" alt="image" src="https://github.com/user-attachments/assets/23040c40-183c-469f-b63e-9e88f01ec0d4" />
-
-
-  - 以下のプログラムを貼り付ける
-  - portを選択する
-  - Boards Managerを開く
-  - Boardを選択する
-
-
- ### Android Studioのインストール方法と実行方法
-  - Android StudioをPCにダウンロード,インストールする
-
- 
-
-=======
 # RLSS_Android-Studio_gadget
-遠距離恋愛支援システムのガジェット化のAndroid Studioのコードです
->>>>>>> 6e91e52be814811b0c75a12ade29bb23e8e5ed0f
+- 遠距離恋愛支援システムのガジェット化のAndroid Studioのコードです
+- このコードをAndroid Studioに持って行ってください
+- GitHubからPCに持ってくることを「クローン (Clone)」といいますので、クローンしてください
+
+- クローンのやり方
+ - Android StudioでGitHub上のプロジェクトをクローン（ダウンロードして開くこと）するのは簡単です。
+
+ - 手順は、まずGitHubでリポジトリのURLをコピーし、次にそのURLをAndroid Studioに貼り付けるだけです。
+ - GitHubでURLをコピーする
+ - 最初に、クローンしたいGitHubリポジトリのページをブラウザで開きます。
+ - 緑色の < > Code ボタンをクリックします。
+ - 表示されたメニューで HTTPS が選択されていることを確認します。
+ - URLの右側にあるコピーアイコンをクリックして、URLをクリップボードにコピーします。
+
+ - Android Studioでクローン
+ - 次にAndroid Studioを開いて、コピーしたURLを使ってプロジェクトをクローンします。
+ - Android Studioのウェルカムスクリーンで Get from VCS をクリックします。（VCSは Version Control System の略です）
+ - もし既に別のプロジェクトを開いている場合は、メニューバーから File > New > Project from Version Control... を選択してください。
+ - 開かれたウィンドウの URL 入力欄に、先ほどGitHubでコピーしたURLを貼り付けます。
+ - Directory の欄には、プロジェクトがPC上のどこに保存されるかが表示されます。必要に応じて変更できます。
+ - Clone ボタンをクリックします。
+ - クローンが完了すると、Android Studioが自動的にプロジェクトを開き、ビルドの準備（Gradle Sync）を始めます。「
+ - Trust Project?」と聞かれたら、信頼できるプロジェクトであれば Trust Project をクリックしてください。
+
+これで、GitHub上のプロジェクトコードをAndroid Studioで編集できるようになります。
+
+
+
+
+
+
+
+
+
