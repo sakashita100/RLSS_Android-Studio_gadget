@@ -104,6 +104,8 @@ dependencies {
 */
 
     implementation ("javax.annotation:javax.annotation-api:1.3.2")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.1") // 最新版でOK
+
 
 
     implementation ("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
@@ -117,6 +119,15 @@ dependencies {
 
     implementation ("org.eclipse.paho:org.eclipse.paho.client.mqttv3:+")
 
+    implementation ("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
+    implementation ("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
+    implementation ("org.eclipse.paho:org.eclipse.paho.android.service:1.1.1")
+
+
+
+    //implementation ("com.github.polarofficial:polar-ble-sdk:5.3.0")
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.6")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
 
 
     testImplementation("junit:junit:4.13.2")
